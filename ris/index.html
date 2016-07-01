@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <link href="css/bootstrap-3.2.0.min.css" rel="stylesheet" />
+    <link href="css/bootstrap-theme-3.2.0.min.css" rel="stylesheet" />
+    <link href="css/prettify.css" rel="stylesheet" />
+    <style>
+      body                { position   :relative; }
+      body > .container   { padding-top:60px;     }
+      .navbar-brand       { background:url(/logo.png) left 5px no-repeat;}
+    </style>
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document" data-spy="scroll" data-target=".navbar">
+
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#top">&nbsp; &nbsp; &nbsp;Kount RIS</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#usage">Getting Started</a></li>
+        <li><a href="#credentials">Permissions</a></li>
+        <li class="dropdown">
+          <a href="#versions" class="dropdown-toggle" data-toggle="dropdown">Versions<span class="caret"></span></a>
+          <ul id="versionDropdown" class="dropdown-menu" role="menu">
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#modes" class="dropdown-toggle" data-toggle="dropdown">Modes<span class="caret"></span></a>
+          <ul id="modesDropdown" class="dropdown-menu" role="menu">
+          </ul>
+        </li>
+       <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25">OAuth JWT RFC</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!--
+      <ul class="nav navbar-nav pull-right">
+        <li class=""><a href="#console"><span class="glyphicon glyphicon-send"></span></a></li>
+      </ul>
+      <div class="clearfix"></div>
+      -->
+    </div>
+  </div>
+</div>
+
+
+<a name="usage"></a>
+<div id="usage" class="container bg-success">
+  <h2>Getting Started</h2>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <h4>Prerequisites</h4>
+      <ul>
+        <li>Kount Merchant Account With <a href="http://www.kount.com/products/kount-complete">Kount Complete</a></li>
+        <li>Kount Device Data Collector installed (see your Technical Account Manager for Assistance)</li>
+        <li>Kount RIS API key</li>
+      </ul>
+      <br />
+
+      <h4>Request &amp; Response Overview</h4>
+      RIS API key requests follow the same pattern:
+      <ul>
+        <li> The merchant wants to contact Kount and has an API key.
+        <li> The merchant constructs a payload and auth header.
+        <li> The merchant sends a request with:
+          <ul>
+            <li> Their API key encoded in the header.
+            <li> The request encoded as the POST data.
+	    <li> The Content-Type set to <tt>application/x-www-form-urlencoded</tt> in the header.
+          </ul>
+        <li> Kount sends the appropriate response to the request based upon merchant created rules triggered specific to the submission.
+      </ul>
+      <br />
+
+      <h4>Errors and Warnings</h4>
+      There are two types of errors:
+      <ul>
+        <li> <tt><strong>Validation</strong></tt> <em>indicates the data posted did not pass validation (these are listed below)</em>
+        <li> <tt><strong>Runtime</strong></tt> <em> indicates there was an other error that ended the request (ex. disabled merchant)</em>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <h4>Request &amp; Response Formatting</h4>
+      <p>All endpoints expect a payload as described by the documentation below.
+      <pre class="prettyprint lang-sh">curl https://risk.kount.net \
+-d 'KEY=VALUE'
+...
+-d 'KEY_N=VALUE_N</pre>
+      <p>All replies will contain a reply containing newline delimited Key-Value pairs
+      <pre class="prettyprint lang-xml">
+KEY=VALUE
+...
+KEY_N=VALUE_N
+</pre>
+    </div>
+  </div>
+</div>
+
+<div id="credentials" class="container bg-warning">
+  <a name="credentials"></a>
+  <h2>Authentication and Authorization</h2>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <p>An API key is required to utilize the <a href="http://www.kount.com/products/kount-complete">Kount Complete</a> RIS service.</p>
+      <p> API keys can be generated within the Agent Web Console. Navigate to the ADMIN tab > API Keys. Once the key has been created, copy the 
+         key value (Kount uses a <abbr title="JSON Web Token">JWT</abbr> or JSON Web Token) into the key value header called 
+         <mark><samp>X-Kount-Api-Key</samp></mark>.</p>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <h4>Example of passing the header with curl</h4>
+      <pre class="prettyprint lang-sh">curl https://risk.kount.net \
+--header "X-Kount-Api-Key: YOUR.KEY.HERE" \
+--header "Content-Type: application/x-www-form-urlencoded" </pre>
+    </div>
+  </div>
+</div>
+
+<div id="modeContainer" class="container">
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6">
+      &copy; 2014 Kount Inc, All Rights Reserved
+    </div>
+    <div class="col-xs-6 text-right">
+      <a href="mailto:support@kount.com">support@kount.com</a>
+    </div>
+  </div>
+  <br />
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap-3.2.0.min.js"></script>
+<script src="js/prettify.js"></script>
+<script src="js/handlebars-v3.0.0.js"></script>
+<script>
+  $(function () {
+    var modeTemplateSrc = $('#modeTemplate').html();
+    var modeDropdownTemplateSrc = $('#modeDropdownTemplate').html();
+    var versionDripdownTemplateSrc = $('#versionDropdownTemplate').html();
+    var modeTemplate = Handlebars.compile(modeTemplateSrc);
+    var modeDropdownTemplate = Handlebars.compile(modeDropdownTemplateSrc);
+    var versionDropdownTemplate = Handlebars.compile(versionDripdownTemplateSrc);
+
+    var versions = ['0630'];
+    $('#versionDropdown').html(versionDropdownTemplate({versions : versions}));
+
+    loadVersion = function (version) {
+      $('#exampleModal').modal('show')
+      $.getJSON("ris-api-" + version + ".json", function (data) {
+
+        $("#modeContainer").html(modeTemplate(data));
+        $("#modesDropdown").html(modeDropdownTemplate(data));
+        /*
+        for (var i=0; i<data.modes.length; i++) {
+          var mode = data.modes[i];
+          $('#mode' + mode.name + '-fields-all').on('change', function () {
+            $('.mode' + mode.name + '.field').collapse('show');
+          }.bind(mode.name));
+          $('#mode' + mode.name + '-fields-required').on('change', function () {
+            $('.mode' + mode.name + '.required').collapse('show');
+            $('.mode' + mode.name + '.optional').collapse('hide');
+          }.bind(mode.name));
+          $('#mode' + mode.name + '-fields-optional').on('change', function () {
+            $('.mode' + mode.name + '.required').collapse('hide');
+            $('.mode' + mode.name + '.optional').collapse('show');
+          }.bind(mode.name));
+        }
+        */
+
+        prettyPrint();
+        $('.field').collapse('show');
+        $('#exampleModal').modal('hide')
+      });
+    };
+
+    loadVersion(versions[0]);
+
+    $('.version').click(function () {
+      loadVersion($(this).data('version'));
+    });
+
+  });
+</script>
+
+<script id="modeDropdownTemplate" type="text/x-handlebars-template">
+  <!-- start mode dropdown template -->
+  {{#modes}}
+  <li>
+    <a href="#mode_{{name}}">Mode {{name}} - {{short-description}}</a>
+  </li>
+  <!-- end mode dropdown template -->
+  {{/modes}}
+</script>
+
+<script id="versionDropdownTemplate" type="text/x-handlebars-template">
+  {{#versions}}
+  <li>
+    <a href="#" class="version" data-version="{{this}}">{{this}}</a>
+  </li>
+  {{/versions}}
+</script>
+
+<script id="modeTemplate" type="text/x-handlebars-template">
+<!-- start mode template -->
+<a name="modes"></a>
+<div class="row">
+  <div class="col-xs-12">
+
+  <h2>Modes</h2>
+  {{#modes}}
+  <div id="mode_{{name}}" class="row">
+    <a name="mode_{{name}}"></a>
+    <br /><br />
+    <br /><br />
+
+    <div class="col-xs-6">
+      <tt><a name="mode_{{name}}" href="#mode_{{name}}">#mode_{{name}}</a></tt>
+    </div>
+    <div class="col-xs-6 text-right">
+      <tt><a href="#top">#top</a></tt>
+    </div>
+
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading"></div>
+          <div class="col-xs-12 bg-info">
+            <div class="pull-right" style="margin-top:8px">
+              <kbd>{{../http-type}}</kbd> &nbsp; <samp>{{../endpoint}}</samp>
+            </div>
+            <h3 class="text-primary">Mode {{name}}</h3>
+            <strong class="initialism">{{short-description}}</strong>
+            <p>
+          </div>
+          <div class="clearfix"></div>
+          <div class="panel-body">
+            {{#long-description}}
+            <p>{{section}}</p>
+            {{/long-description}}
+          </div>
+          <div class="panel-footer">
+
+          <div class="col-xs-12 col-sm-6">
+
+            <div class="row">
+              <div class="col-xs-8">
+                <h4>Args</h4>
+              </div>
+              <div class="col-xs-4 text-right">
+                <h4>
+                  <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-xs btn-default active">
+                      <input type="radio" name="fields" id="mode{{name}}-fields-all" autocomplete="off" checked>All</input>
+                    </label>
+                    <label class="btn btn-default btn-xs">
+                      <input type="radio" name="fields" id="mode{{name}}-fields-required" autocomplete="off">Required</input>
+                    </label>
+                    <label class="btn btn-default btn-xs">
+                      <input type="radio" name="fields" id="mode{{name}}-fields-optional" autocomplete="off">Optional</input>
+                    </label>
+                  </div>
+                </h4>
+              </div>
+            </div>
+            <table class="table table-hover table-condensed">
+              <thead>
+                <tr>
+                  <th width=1>Name</th>
+                  <th>Description</th>
+                  <th width=1>Required</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#args}}
+                  <tr class="field mode{{../name}} {{#required}}required{{/required}}{{^required}}optional{{/required}}">
+                    <td><kbd>{{name}}</kbd></td>
+                    <td>            <samp>&lsaquo;<span class=initialism>{{type-description}}</span>&rsaquo;</samp><br />
+                      <small>{{description}}. ie: {{example}}
+                        <ul>
+                          {{#valid-values}}
+                            <li>{{value}} - {{description}}</li>
+                          {{/valid-values}}
+                          {{#valid-values-url}}
+                            <li><a href="{{../valid-values-url}}">{{../valid-values-url}}</a></li>
+                          {{/valid-values-url}}
+                        </ul>
+                      </small>
+                    </td>
+                    <td>
+                      {{#required}}
+                        <span class="label label-danger">
+                          required            </span>
+                      {{/required}}
+                      {{^required}}
+                        <span class="label label-default">
+                        optional            </span>
+                      {{/required}}
+                    </td>
+                  </tr>
+                {{/args}}
+              </tbody>
+            </table>
+
+            <h4>Reply</h4>
+            <table class="table table-hover table-condensed">
+              <thead>
+                <tr>
+                  <th width=1>Name</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#reply}}
+                  <tr>
+                    <td><kbd>{{name}}</kbd></td>
+                    <td>            <samp>&lsaquo;<span class=initialism>{{type-description}}</span>&rsaquo;</samp><br />
+                      <small>{{description}}. ie: {{example}}
+                        <ul>
+                          {{#valid-values}}
+                            <li>{{value}} - {{description}}</li>
+                          {{/valid-values}}
+                        </ul>
+                      </small>
+                    </td>
+                    <td>
+                      {{#conditional}}
+                        <span class="label label-default">
+                          conditional
+                        </span>
+                      {{/conditional}}
+                    </td>
+                  </tr>
+                {{/reply}}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <h5>Curl Command:</h5>
+            <pre class="prettyprint lang-sh">{{example-curl}}</pre>
+
+            <h5>Example Reply</h5>
+            <pre class="prettyprint lang-xml">{{example-reply}}</pre>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <span class="caret"><a class="" href="#collapseError{{name}}" data-toggle="collapse" aria-controls="collapseError{{name}}"></span> Errors</a>
+          </h4>
+        </div>
+        <div class="panel-collapse collapse" aria-expanded="false" id="collapseError{{name}}">
+          <div class="panel-body">
+            <dl>
+              {{#errors}}
+                <dt>{{code}} {{name}}</dt>
+                <dd>{{description}}</dd>
+              {{/errors}}
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><hr />
+  {{/modes}}
+  </div>
+</div>
+<!-- end modes template -->
+</script>
+
+</body>
+</html>
