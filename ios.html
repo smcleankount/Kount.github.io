@@ -52,8 +52,8 @@
           <h3>Requirements</h3>
           <ul>
           <li><a href="http://www.kount.com/fraud-detection-software">Kount integration</a></li>
-          <li><a href="https://developer.apple.com/xcode/download/">Xcode 7 and iOS 9 SDK</a></li>
-          <li>iOS 7.0+ deployment target</li>
+          <li><a href="https://developer.apple.com/xcode/download/">Xcode 8 and iOS 10 SDK</a></li>
+          <li>iOS 8.0+ deployment target</li>
           </ul>
           <h3>Installation</h3>
           
@@ -83,11 +83,11 @@
   ...
 }</pre>
           <h5>Swift</h5>
-<pre class="prettyprint">func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -&gt; Bool {
+<pre class="prettyprint">func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool { 
   ...
-        KDataCollector.sharedCollector().merchantID = &lt;MERCHANT_ID&gt;
-        KDataCollector.sharedCollector().locationCollectorConfig = KLocationCollectorConfig.RequestPermission
-        KDataCollector.sharedCollector().environment = KEnvironment.Test
+        KDataCollector.shared().merchantID = &lt;MERCHANT_ID&gt;
+        KDataCollector.shared().locationCollectorConfig = KLocationCollectorConfig.requestPermission
+        KDataCollector.shared().environment = KEnvironment.test
   ...
 }
 </pre>
@@ -115,7 +115,7 @@
           <h5>Swift</h5>
           <pre class="prettyprint">override func viewDidAppear(animated: Bool) {
   ...
-        KDataCollector.sharedCollector().collectForSession(&lt;SESSION_ID&gt;) { (sessionID, success, error) in
+        KDataCollector.shared().collect(forSession: &lt;SESSION_ID&gt;) { (sessionID, success, error) in
             // Add handler code here if desired. The completion block is optional.
         }
   ...
