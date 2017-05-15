@@ -1,74 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width'>
+  <title>Kount Developer Assets</title>
 
-    <title>Kount</title>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
-    <!-- Bootstrap core CSS -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+<header>
+  <img src='img/dev-banner.jpg'/>
+</header>
+<main>
 
-    <link href="styles/navbar.css" rel="stylesheet"/>
+  <div>
+    <h1>Kount Developer</h1>
+    <p>These assets help Developers integrate and leverage Kount's
+      solutions to Boost Sales, Beat Fraud.</p>
+  </div>
 
-<script type="text/javascript" src="scripts/shCore.js"></script>
-<script type="text/javascript" src="scripts/shBrushObjC.js"></script>
-<script type="text/javascript" src="scripts/shBrushXml.js"></script>
-<link type="text/css" rel="stylesheet" href="styles/shCoreDefault.css"/>
-<link type="text/css" rel="stylesheet" href="styles/customization.css"/>
-<script type="text/javascript">SyntaxHighlighter.defaults['toolbar'] = false; SyntaxHighlighter.all(); </script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-
-    <div class="container">
-
-      <!-- Static navbar -->
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">Kount</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="ios.html">iOS</a></li>
-              <li><a href="android.html">Android</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </nav>
-
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="container">
-          <h2>RIS API</h2>
-          <p>For RIS API documentation, please visit our support site: <a href="https://support.kount.com/@api/deki/files/396/spec_guide.pdf">RIS API Specification</a></p>
-          <h2>Mobile Client SDKs</h2>
-          <p>Kount's Mobile SDKs for iOS and Android help integrate Kount's fraud fighting solution into your app:</p>
-          <ul>
-              <li><a href="ios.html">iOS SDK</a></li>
-              <li><a href="android.html">Android SDK</a></li>
-              </ul>
+  <div id="mobile-client">
+    <h2>Mobile Client SDKs</h2>
+    <p>Kount's Mobile SDKs for iOS and Android help integrate Kount's fraud fighting solution into your app.</p>
+    <div class="cards">
+      <div>
+        <div><i class="fa fa-android fa-5x"></i></div>
+        <a href="mobile-client/android.html">
+          <h3>Android SDK</h3>
+          <p>Mobile client SDK for Android</p>
+        </a>
+      </div>
+      <div>
+        <div><i class="fa fa-apple fa-5x"></i></div>
+        <a href="mobile-client/ios.html">
+          <h3>iOS</h3>
+          <p>Mobile client SDK for iOS</p>
+        </a>
       </div>
     </div>
+  </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
+  <div id="ris">
+    <h2>Risk Inquiry Service SDKs</h2>
+    <p>Platform SDKs to help perform real-time risk evaluation using Kount's RIS API.</p>
+    <div class='cards'>
+      <div>
+        <div><i class="fa fa-code fa-5x"></i></div>
+        <a href="ris-sdk/java.html">
+          <h3>Java SDK</h3>
+          <p>RIS SDK for Java</p>
+        </a>
+      </div>
+      <div>
+        <div><i class="fa fa-code fa-5x"></i></div>
+        <a href="ris-sdk/dotnet.html">
+          <h3>.Net SDK</h3>
+          <p>RIS SDK for .Net</p>
+        </a>
+      </div>
+      <div>
+        <div><i class="fa fa-code fa-5x"></i></div>
+        <a href="ris-sdk/php.html">
+          <h3>PHP SDK</h3>
+          <p>RIS SDK for PHP</p>
+        </a>
+      </div>
+      <div>
+        <div><i class="fa fa-code fa-5x"></i></div>
+        <a href="ris-sdk/python.html">
+          <h3>Python SDK</h3>
+          <p>RIS SDK for Python</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <div>
+    <a href="https://github.com/Kount"><i class='fa fa-github'></i>Github</a>
+    <a href="index.html"><i class='fa fa-cogs'></i>Kount Developer</a>
+    <a href='mailto:support@kount.com'><i class='fa fa-frown-o'></i>Report Issues</a>
+  </div>
+</footer>
+</body>
 </html>
